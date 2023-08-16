@@ -1,18 +1,20 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'floppy.db.elephantsql.com/nfortglu',
+      host: process.env.DATABASE_HOST,
       port: 5432,
-      username: 'nfortglu',
-      password: '8iW65douwCVrZEwh7hJHmNKFXW9fRstI',
+      username: process.env.DATABASE_USER_NAME,
+      password: process.env.DATABASE_PASSWORD,
       entities: [],
-      database: 'nfortglu',
+      database: process.env.DATABASE_NAME,
       synchronize: true,
       logging: true,
     }),
