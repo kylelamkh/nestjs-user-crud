@@ -6,6 +6,9 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { User } from '../src/user/entities/user.entity';
 import { mockUserRepositoryFactory } from '../src/user/test/mock/mock_user_repository';
 import { UserController } from '../src/user/user.controller';
+import * as bcrypt from 'bcrypt';
+
+jest.mock('bcrypt');
 
 describe('UserController (e2e)', () => {
   let app: INestApplication;
@@ -44,6 +47,10 @@ describe('UserController (e2e)', () => {
     app = moduleFixture.createNestApplication();
     app.useGlobalPipes(new ValidationPipe());
     userService = moduleFixture.get<UserService>(UserService);
+
+    (bcrypt.genSalt as jest.Mock) = jest.fn().mockReturnValue(10);
+    (bcrypt.hash as jest.Mock) = jest.fn().mockReturnValue('hashedPassword');
+
     await app.init();
   });
 

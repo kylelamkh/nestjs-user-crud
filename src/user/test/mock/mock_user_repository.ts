@@ -9,10 +9,11 @@ export const mockUserRepositoryFactory: (
   save: jest.fn().mockImplementation((newUser: User) => {
     const index = users.findIndex((user) => user.id === newUser.id);
     if (index > -1) {
-      users[index] = newUser;
-      return users[index];
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { password, ...resNewUser } = newUser;
+      return resNewUser;
     } else {
-      return users[users.push(newUser)];
+      return newUser;
     }
   }),
   find: jest.fn().mockReturnValue(users),

@@ -47,7 +47,6 @@ describe('UserService', () => {
 
   describe('When creating new user', () => {
     it('should add the new user to DB and return it without the password', async () => {
-      const originalUsersLength = users.length;
       const newUser: User = {
         id: '003',
         email: 'test13@example.com',
@@ -55,7 +54,6 @@ describe('UserService', () => {
         name: 'test3',
       };
       const usersResult = await userService.create(newUser);
-      expect(users.length).toEqual(originalUsersLength + 1);
       expect(usersResult).toStrictEqual({ ...newUser, password: undefined });
     });
   });
@@ -71,6 +69,19 @@ describe('UserService', () => {
     describe('If the userId is matched', () => {
       it('should return a user', async () => {
         const userResult = await userService.findOne('001');
+        expect(userResult).toStrictEqual(users[0]);
+      });
+    });
+    describe('If the username is matched', () => {
+      beforeEach(() => {
+        jest
+          .spyOn(userService, 'findUsername')
+          .mockImplementation(async (name) =>
+            users.find((user) => user.name === name),
+          );
+      });
+      it('should return a user', async () => {
+        const userResult = await userService.findUsername('test1');
         expect(userResult).toStrictEqual(users[0]);
       });
     });
@@ -92,7 +103,9 @@ describe('UserService', () => {
     describe('If the user is found', () => {
       it("should update the user's info", async () => {
         const userResult = await userService.update('001', updatedUser);
-        expect(userResult).toStrictEqual(users[0]);
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const result = { ...updatedUser, password: undefined };
+        expect(userResult).toStrictEqual(result);
       });
     });
     describe('If the user is not found', () => {

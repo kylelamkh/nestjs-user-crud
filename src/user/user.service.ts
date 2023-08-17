@@ -10,7 +10,7 @@ import { getHashedString } from '../utils/getHashedString';
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
+    private userRepository: Repository<User>,
   ) {}
 
   /**
@@ -24,8 +24,8 @@ export class UserService {
       ...createUserDto,
       password: hashedPassword,
     });
-    this.userRepository.save(createdUser);
-    return { ...createdUser, password: undefined };
+    const newUser = await this.userRepository.save(createdUser);
+    return { ...createdUser, password: undefined, id: newUser.id };
   }
 
   /**
@@ -43,6 +43,15 @@ export class UserService {
    */
   findOne(id: string) {
     return this.userRepository.findOneBy({ id });
+  }
+
+  /**
+   * this function used to get data of a user by username
+   * @param name is a string, which is the username
+   * @returns promise of user
+   */
+  findUsername(name: string) {
+    return this.userRepository.findOneBy({ name });
   }
 
   /**
