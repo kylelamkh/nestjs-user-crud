@@ -1,30 +1,6 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Node version: 18.17.0
 
 ## Installation
 
@@ -58,16 +34,168 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+### Swagger
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+While running the server,
 
-## Stay in touch
+```url
+http://localhost:3000/api
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## API
 
-## License
+<table>
+<tr>
+<td> Method </td> <td> Endpoint </td> <td> Description </td> <td> Request Body </td> <td> Response </td>
+</tr>
+<tr>
+<td> GET </td>
+<td>
 
-Nest is [MIT licensed](LICENSE).
+```url
+/user
+```
+
+</td>
+<td> get all users </td>
+<td>
+</td>
+<td>
+
+```json
+[
+  {
+    "id": "473dff46-8eb1-4bc4-811c-163201db294d",
+    "name": "test123",
+    "email": "test@example.com",
+    "password": "$2b$10$LJBJ5U6yYeflRVJn4VaDGO/D7HBZqQ5bVVXwm5uzT2mcs9IY/bUsm"
+  },
+  {
+    "id": "4becb117-6fe4-4e9c-9a16-d645768ffc3c	",
+    "name": "test1234",
+    "email": "test@example.com",
+    "password": "$2b$10$LNBYxj3e0St2p1OmCj/EouKh8yYwt55K48kAbBA4U5.Zrg6e5OMb2"
+  }
+]
+```
+
+</td>
+
+</tr>
+<td> GET </td>
+<td>
+
+```url
+/user/{id}
+```
+
+</td>
+<td> get user by id </td>
+<td>  </td>
+<td>
+
+```json
+{
+  "id": "473dff46-8eb1-4bc4-811c-163201db294d",
+  "name": "test123",
+  "email": "test@example.com",
+  "password": "$2b$10$LJBJ5U6yYeflRVJn4VaDGO/D7HBZqQ5bVVXwm5uzT2mcs9IY/bUsm"
+}
+```
+
+</td>
+
+</tr>
+<td> POST </td>
+<td>
+
+```url
+/user
+```
+
+</td>
+<td>create new user </td>
+<td>
+
+```json
+{
+  "name": "test1234",
+  "email": "test1234@example.com",
+  "password": "test1234"
+}
+```
+
+</td>
+<td>
+
+```json
+{
+  "id": "473dff46-8eb1-4bc4-811c-163201db294d",
+  "name": "test1234",
+  "email": "test1234@example.com"
+}
+```
+
+</td>
+
+</tr>
+<td> PATCH </td>
+<td>
+
+```url
+/user/{id}
+```
+
+</td>
+<td> update user info </td>
+<td>
+
+```json
+{
+  "name": "test1234",
+  "email": "test1234@example.com",
+  "password": "test1234"
+}
+```
+
+</td>
+
+<td>
+
+```json
+{
+  "id": "473dff46-8eb1-4bc4-811c-163201db294d",
+  "name": "test1234",
+  "email": "test1234@example.com"
+}
+```
+
+</td>
+
+</tr>
+
+</tr>
+<td> DELETE </td>
+<td>
+
+```url
+/user/{id}
+```
+
+</td>
+<td> delete a user</td>
+<td>
+</td>
+
+<td>
+
+```json
+{
+  "affected": 0
+}
+```
+
+</td>
+
+</tr>
+</table>
