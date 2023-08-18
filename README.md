@@ -49,6 +49,38 @@ http://localhost:3000/api
 <td> Method </td> <td> Endpoint </td> <td> Description </td> <td> Request Body </td> <td> Response </td>
 </tr>
 <tr>
+<td> POST </td>
+<td>
+
+```url
+/auth/login
+```
+
+</td>
+<td> login to get JWT </td>
+<td>
+
+```json
+{
+  "name": "test123",
+  "password": "test1234"
+},
+```
+
+</td>
+
+<td>
+
+```json
+{
+  "access_token": "string"
+}
+```
+
+</td>
+
+</tr>
+<tr>
 <td> GET </td>
 <td>
 

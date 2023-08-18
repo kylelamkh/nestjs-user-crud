@@ -3,6 +3,7 @@ import { LocalAuthGuard } from './local-auth.guard';
 import { AuthService } from './auth.service';
 import { ApiOperation, ApiResponse, ApiTags, ApiBody } from '@nestjs/swagger';
 import { LoginBody } from './dtc/login-auth.dto';
+import { LoginResponse } from './dtc/login-auth-response.dto';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -14,7 +15,7 @@ export class AuthController {
   @ApiBody({ type: LoginBody })
   @ApiOperation({ summary: 'Login' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
-  @ApiResponse({ status: 201, description: 'Created.' })
+  @ApiResponse({ status: 201, description: 'Created.', type: LoginResponse })
   async login(@Request() req) {
     return this.authService.login(req.user);
   }
